@@ -96,22 +96,68 @@
         .card h3 { margin-bottom: 20px; color: #007bff; font-size: 1.8rem; }
         .card p, .card li { font-size: 1.1rem; color: #555; }
 
-        /* TIM KERJA STYLE */
-        .tim-grid { display: flex; gap: 20px; flex-wrap: wrap; justify-content: center; }
+        /* TIM KERJA DASHBOARD STYLE */
+        .tim-grid { display: flex; gap: 20px; flex-wrap: wrap; justify-content: center; margin-bottom: 40px; }
         .tim-box {
             text-align: center; 
-            width: 180px; 
-            padding: 25px 15px; 
+            width: 160px; 
+            padding: 20px 10px; 
             background: #ffffff; 
             border-radius: 12px; 
             box-shadow: 0 4px 10px rgba(0,0,0,0.05);
             border-bottom: 4px solid #007bff;
             transition: 0.3s;
+            cursor: pointer;
         }
-        .tim-box:hover { transform: translateY(-5px); background: #eef6ff; }
-        .tim-icon { width: 70px; height: 70px; margin-bottom: 15px; object-fit: contain; }
+        .tim-box:hover, .tim-box.active { transform: translateY(-5px); background: #eef6ff; border-bottom: 4px solid #28a745; }
+        .tim-icon { width: 60px; height: 60px; margin-bottom: 15px; object-fit: contain; }
 
-        /* PRESTASI STYLE (DENGAN IKON PIALA) */
+        /* SUB-BAGIAN BUTTONS */
+        #sub-bagian-container { 
+            display: none; 
+            background: #fdfdfd; 
+            padding: 30px; 
+            border-radius: 15px; 
+            box-shadow: inset 0 0 10px rgba(0,0,0,0.05);
+            text-align: center;
+            margin-top: 20px;
+        }
+        .btn-sub {
+            padding: 10px 20px;
+            margin: 5px;
+            border: 2px solid #007bff;
+            background: white;
+            color: #007bff;
+            border-radius: 25px;
+            font-weight: bold;
+            cursor: pointer;
+            transition: 0.3s;
+        }
+        .btn-sub:hover, .btn-sub.active { background: #007bff; color: white; }
+
+        /* DETAIL LIST STYLE */
+        #detail-list { 
+            display: none; 
+            margin-top: 20px; 
+            text-align: left; 
+            max-width: 600px; 
+            margin-left: auto; 
+            margin-right: auto;
+            background: white;
+            padding: 20px;
+            border-radius: 10px;
+            border-left: 5px solid #28a745;
+        }
+        .detail-item {
+            display: flex;
+            justify-content: space-between;
+            padding: 10px 0;
+            border-bottom: 1px solid #eee;
+        }
+        .detail-item a { color: #007bff; text-decoration: none; font-weight: 500; }
+        .detail-item a:hover { text-decoration: underline; }
+
+        /* PRESTASI STYLE */
         .berita-container { display: flex; gap: 25px; flex-wrap: wrap; justify-content: center; }
         .prestasi-card {
             background: white; 
@@ -123,7 +169,6 @@
             transition: 0.3s;
             border-top: 5px solid gold;
         }
-        .prestasi-card:hover { transform: translateY(-10px); }
         .piala-icon { width: 80px; height: 80px; margin-bottom: 20px; }
         .berita-btn {
             text-decoration: none; 
@@ -138,13 +183,6 @@
         }
 
         footer { text-align: center; padding: 40px; background: #222; color: #bbb; font-size: 1rem; }
-
-        @media (max-width: 768px) {
-            nav ul { gap: 10px; flex-wrap: wrap; justify-content: center; }
-            nav ul li a { font-size: 0.8rem; }
-            .hero-text h1 { font-size: 2rem; }
-            section { padding: 50px 5%; }
-        }
     </style>
 </head>
 <body>
@@ -196,38 +234,36 @@
 
         <section id="tim" style="background: white;">
             <h2 class="section-title">Tim Kerja</h2>
+            <p style="text-align: center; margin-bottom: 20px; color: #666;">Pilih Tim Kerja untuk melihat detail sub-bagian</p>
+            
             <div class="tim-grid">
-                <div class="tim-box">
+                <div class="tim-box" onclick="showSubBagian('umum')">
                     <img src="https://cdn-icons-png.flaticon.com/512/3135/3135715.png" class="tim-icon" alt="Umum">
                     <h4>Umum</h4>
                 </div>
-                <div class="tim-box">
+                <div class="tim-box" onclick="showSubBagian('sosial')">
                     <img src="https://cdn-icons-png.flaticon.com/512/2583/2583155.png" class="tim-icon" alt="Sosial">
                     <h4>Sosial</h4>
                 </div>
-                <div class="tim-box">
+                <div class="tim-box" onclick="showSubBagian('produksi')">
                     <img src="https://cdn-icons-png.flaticon.com/512/2622/2622271.png" class="tim-icon" alt="Produksi">
                     <h4>Produksi</h4>
                 </div>
-                <div class="tim-box">
+                <div class="tim-box" onclick="showSubBagian('distribusi')">
                     <img src="https://cdn-icons-png.flaticon.com/512/2855/2855581.png" class="tim-icon" alt="Distribusi">
                     <h4>Distribusi</h4>
                 </div>
-                <div class="tim-box">
-                    <img src="https://cdn-icons-png.flaticon.com/512/423/423786.png" class="tim-icon" alt="Nerwilis">
-                    <h4>Nerwilis</h4>
                 </div>
-                <div class="tim-box">
-                    <img src="https://cdn-icons-png.flaticon.com/512/2082/2082803.png" class="tim-icon" alt="IPDS">
-                    <h4>IPDS</h4>
-                </div>
-                <div class="tim-box">
-                    <img src="https://cdn-icons-png.flaticon.com/512/1055/1055644.png" class="tim-icon" alt="PSS">
-                    <h4>PSS</h4>
-                </div>
-                <div class="tim-box">
-                    <img src="https://cdn-icons-png.flaticon.com/512/1605/1605350.png" class="tim-icon" alt="RB">
-                    <h4>RB</h4>
+
+            <div id="sub-bagian-container">
+                <h3 id="selected-tim-name" style="margin-bottom: 20px; color: #2c3e50;">Sub Bagian Tim</h3>
+                <div id="sub-buttons">
+                    </div>
+
+                <div id="detail-list">
+                    <h4 id="selected-sub-name" style="border-bottom: 2px solid #eee; padding-bottom: 10px; margin-bottom: 15px;">Daftar Pekerjaan</h4>
+                    <div id="list-items">
+                        </div>
                 </div>
             </div>
         </section>
@@ -235,21 +271,12 @@
         <section id="prestasi" style="background-color: #f4f7f6;">
             <h2 class="section-title">Prestasi</h2>
             <div class="berita-container">
-                
                 <div class="prestasi-card">
                     <img src="https://cdn-icons-png.flaticon.com/512/3112/3112946.png" class="piala-icon" alt="Piala">
                     <h4 style="color: #007bff; margin-bottom: 10px;">Terbaik 1 Pengelolaan APBN Tahun 2024</h4>
-                    <p style="font-size: 0.9rem; color: #666;">Peringkat Pertama Satuan Kerja dengan kinerja pengelolaan APBN terbaik Tahun 2024 kategori pagu DIPA sedang (5 s.d 20 miliar rupiah) yang diberikan oleh Kementerian Keuangan Direktorat Jenderal Perbendaharaan Kepala KPPN Tipe A1 Masohi.</p>
-                    <a href="https://lh3.googleusercontent.com/u/0/d/1FBgpJugrxDh_crupYzrlvkM5JHmFm9qL" target="_blank" class="berita-btn">Lihat PDF Sertifikat</a>
+                    <p style="font-size: 0.9rem; color: #666;">Peringkat Pertama Satuan Kerja dengan kinerja pengelolaan APBN terbaik Tahun 2024 kategori pagu DIPA sedang (5 s.d 20 miliar rupiah)...</p>
+                    <a href="#" target="_blank" class="berita-btn">Lihat PDF Sertifikat</a>
                 </div>
-
-                <div class="prestasi-card">
-                    <img src="https://cdn-icons-png.flaticon.com/512/3112/3112946.png" class="piala-icon" alt="Piala">
-                    <h4 style="color: #007bff; margin-bottom: 10px;">Penghargaan Lainnya</h4>
-                    <p style="font-size: 0.9rem; color: #666;">Deskripsi singkat mengenai prestasi lainnya yang telah diraih...</p>
-                    <a href="LINK_PDF_DI_SINI" target="_blank" class="berita-btn">Lihat PDF Sertifikat</a>
-                </div>
-
             </div>
         </section>
 
@@ -264,5 +291,79 @@
         &copy; 2026 MESE - Monitoring dan Evaluasi e-SBB
     </footer>
 
+    <script>
+        const dataTim = {
+            'umum': {
+                name: 'Tim Umum',
+                subs: {
+                    'Kepegawaian': [
+                        { label: 'Folder Absensi', url: '#' },
+                        { label: 'Spreadsheet Data Pegawai', url: '#' }
+                    ],
+                    'Keuangan': [
+                        { label: 'Realisasi Anggaran', url: '#' }
+                    ],
+                    'Binaprogram': [],
+                    'Umum': [
+                        { label: 'Inventaris Barang', url: '#' }
+                    ],
+                    'PBJ': [],
+                    'HUMAS': []
+                }
+            },
+            'sosial': {
+                name: 'Tim Sosial',
+                subs: {
+                    'Survei Sosial': [],
+                    'Pendataan Lapangan': []
+                }
+            }
+            // Tambahkan tim lain di sini jika sudah ada datanya
+        };
+
+        function showSubBagian(timKey) {
+            const container = document.getElementById('sub-bagian-container');
+            const subButtons = document.getElementById('sub-buttons');
+            const timTitle = document.getElementById('selected-tim-name');
+            const detailList = document.getElementById('detail-list');
+
+            detailList.style.display = 'none';
+            container.style.display = 'block';
+            timTitle.innerText = 'Sub Bagian ' + dataTim[timKey].name;
+            subButtons.innerHTML = '';
+
+            Object.keys(dataTim[timKey].subs).forEach(sub => {
+                const btn = document.createElement('button');
+                btn.className = 'btn-sub';
+                btn.innerText = sub;
+                btn.onclick = () => showDetails(timKey, sub);
+                subButtons.appendChild(btn);
+            });
+            
+            window.location.href = '#sub-bagian-container';
+        }
+
+        function showDetails(timKey, subKey) {
+            const detailList = document.getElementById('detail-list');
+            const listItems = document.getElementById('list-items');
+            const subTitle = document.getElementById('selected-sub-name');
+
+            detailList.style.display = 'block';
+            subTitle.innerText = 'Pekerjaan: ' + subKey;
+            listItems.innerHTML = '';
+
+            const items = dataTim[timKey].subs[subKey];
+            if (items.length === 0) {
+                listItems.innerHTML = '<p style="color:#999 italic;">Belum ada data pekerjaan ditambahkan.</p>';
+            } else {
+                items.forEach(item => {
+                    const div = document.createElement('div');
+                    div.className = 'detail-item';
+                    div.innerHTML = `<span>${item.label}</span><a href="${item.url}" target="_blank">Buka Link &raquo;</a>`;
+                    listItems.appendChild(div);
+                });
+            }
+        }
+    </script>
 </body>
 </html>
